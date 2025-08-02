@@ -3,25 +3,30 @@ load('config.js');
 function execute(key, page) {
     if (!page) page = '1';
 
-    // Địa chỉ URL của máy chủ trung gian bạn sẽ tạo
-    const PROXY_URL = 'https://gemini-proxy-lxrpghuld-tomtees-projects.vercel.app'; 
+    // SỬA LẠI URL CHO ĐÚNG
+    const PROXY_URL = 'https://gemini-proxy-lxrpghuld-tomtees-projects.vercel.app/api/translate'; 
 
-    // 1. Gửi từ khóa tiếng Việt đến proxy để dịch
-    let-response = fetch(PROXY_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: key })
-    });
+    try {
+        // 1. Gửi từ khóa tiếng Việt đến proxy để dịch
+        // SỬA LẠI LỖI CÚ PHÁP "let-response"
+        let response = fetch(PROXY_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text: key })
+        });
 
-    if (!response.ok) {
-        // Nếu dịch lỗi, có thể thử tìm bằng tiếng Việt (khả năng cao là không ra kết quả)
+        if (response.ok) {
+            let translatedKey = response.json().translation;
+            // 2. Dùng từ khóa đã dịch để tìm kiếm trên trang web
+            return searchOnSite(translatedKey, page);
+        } else {
+            // Nếu dịch lỗi, tìm bằng từ khóa gốc
+            return searchOnSite(key, page);
+        }
+    } catch (e) {
+        // Nếu có lỗi mạng khi gọi proxy, tìm bằng từ khóa gốc
         return searchOnSite(key, page);
     }
-
-    let translatedKey = response.json().translation;
-
-    // 2. Dùng từ khóa đã dịch để tìm kiếm trên trang web
-    return searchOnSite(translatedKey, page);
 }
 
 // Hàm tìm kiếm trên uaa.com
