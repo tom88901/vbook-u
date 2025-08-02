@@ -2,10 +2,10 @@
   "metadata": {
     "name": "Uaa",
     "author": "zhi",
-    "version": 14,
+    "version": 15,
     "source": "https://www.uaa.com",
     "regexp": "(www.|m.)?uaa.com/novel/(chapter|intro)[?]id=\\d+",
-    "description": "V14: fix đọc",
+    "description": "V15: fix đọc",
     "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel",
