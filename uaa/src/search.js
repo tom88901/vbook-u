@@ -3,12 +3,9 @@ load('config.js');
 function execute(key, page) {
     if (!page) page = '1';
 
-    // SỬA LẠI URL CHO ĐÚNG
     const PROXY_URL = 'https://gemini-proxy-lxrpghuld-tomtees-projects.vercel.app/api/translate'; 
 
     try {
-        // 1. Gửi từ khóa tiếng Việt đến proxy để dịch
-        // SỬA LẠI LỖI CÚ PHÁP "let-response"
         let response = fetch(PROXY_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -17,21 +14,19 @@ function execute(key, page) {
 
         if (response.ok) {
             let translatedKey = response.json().translation;
-            // 2. Dùng từ khóa đã dịch để tìm kiếm trên trang web
             return searchOnSite(translatedKey, page);
         } else {
-            // Nếu dịch lỗi, tìm bằng từ khóa gốc
             return searchOnSite(key, page);
         }
     } catch (e) {
-        // Nếu có lỗi mạng khi gọi proxy, tìm bằng từ khóa gốc
         return searchOnSite(key, page);
     }
 }
 
 // Hàm tìm kiếm trên uaa.com
 function searchOnSite(key, page) {
-    let url = BASE_URL + '/novel/list?searchType=1&sort=2&page=' + page + '&keyword=' + encodeURIComponent(key);
+    // SỬA LẠI searchType=1 THÀNH searchType=2 VÀ BỎ sort=2
+    let url = BASE_URL + '/novel/list?searchType=2&page=' + page + '&keyword=' + encodeURIComponent(key);
     let response = fetch(url);
 
     if (response.ok) {
