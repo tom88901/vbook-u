@@ -4,7 +4,7 @@ function execute(key, page) {
     if (!page) page = '1';
 
     // Địa chỉ URL của máy chủ trung gian bạn sẽ tạo
-    const PROXY_URL = 'URL_SERVERLESS_FUNCTION_CUA_BAN'; 
+    const PROXY_URL = 'https://gemini-proxy-lxrpghuld-tomtees-projects.vercel.app'; 
 
     // 1. Gửi từ khóa tiếng Việt đến proxy để dịch
     let-response = fetch(PROXY_URL, {
