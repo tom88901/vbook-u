@@ -2,7 +2,6 @@ function execute(url) {
     let response = fetch(url)
     if (response.ok) {
         let doc = response.html();
-        console.log(doc)
         let book = doc.select(".main_box .content_box .left_box")
         let detail="";
         book.select(".info_box div").forEach( e=>{
@@ -12,7 +11,8 @@ function execute(url) {
             name: book.select(".info_box h1").text(),
             cover: book.select(".cover").attr('src'),
             author: book.select(".info_box div").get(2).text().replace("作者：", ""),
-            description: book.select(".brief").text().replace(/\r?\n/g,"<br>"),
+            // SỬA DUY NHẤT Ở DÒNG DƯỚI ĐÂY
+            description: book.select(".brief_box").text().replace(/\r?\n/g,"<br>").replace("开始阅读",""),
             detail: detail,
             host: "https://www.uaa.com"
         });
