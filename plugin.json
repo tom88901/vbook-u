@@ -1,7 +1,7 @@
 {
   "metadata": {
     "name": "Uaa",
-    "author": "TuanHai",
+    "author": "Zhiv2",
     "version": 6,
     "source": "https://www.uaa.com",
     "regexp": "(www.|m.)?uaa.com/novel/(chapter|intro)[?]id=\\d+",
