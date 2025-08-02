@@ -25,7 +25,7 @@ function execute(key, page) {
 
 // Hàm tìm kiếm trên uaa.com
 function searchOnSite(key, page) {
-    // SỬA LẠI searchType=1 THÀNH searchType=2 VÀ BỎ sort=2
+    // SỬA LẠI URL: Đã xóa &sort=2
     let url = BASE_URL + '/novel/list?searchType=2&page=' + page + '&keyword=' + encodeURIComponent(key);
     let response = fetch(url);
 
