@@ -85,5 +85,10 @@ function execute() {
         { title: "异国", input: "异国", script: "cate.js" },
         { title: "异世界", input: "异世界", script: "cate.js" },
         { title: "淫堕", input: "淫堕", script: "cate.js" },
+        { title: "榨精", input: "榨精", script: "cate.js" },
+        { title: "制服", input: "制服", script: "cate.js" },
+        { title: "种马", input: "种马", script: "cate.js" },
+        { title: "种田", input: "种田", script: "cate.js" },
+        { title: "重口", input: "重口", script: "cate.js" },
     ]);
 }

@@ -51,25 +51,6 @@ function execute(url) {
             });
         });
 
-        // Build a suggestion entry to allow users to view the comment list.  The
-        // suggestion contains a title shown on the UI, the input parameter
-        // (here reuse the current URL so the comment script can fetch the
-        // appropriate page), and the script name to execute.  When the user
-        // taps this suggestion, vBookApp will run comment.js and display
-        // the parsed comment list.
-        // Provide a suggestion entry for the comments section.  The title is in
-        // Chinese (评论) to match the interface language and improve detection
-        // by vBookApp.  The input remains the current detail URL so that
-        // comment.js can fetch the same page and extract comments.  Use the
-        // script filename directly.
-        let suggests = [
-            {
-                title: "评论",
-                input: url,
-                script: "comment.js"
-            }
-        ];
-
         return Response.success({
             name: book.select(".info_box h1").text(),
             cover: book.select(".cover").attr('src'),
@@ -78,9 +59,6 @@ function execute(url) {
             description: book.select(".brief_box").text().replace(/\r?\n/g, "<br>").replace("开始阅读", ""),
             detail: detail,
             genres: tagItems,
-            // Provide the suggestion list.  vBookApp will render the clickable
-            // entry under the details section.
-            suggests: suggests,
             host: "https://www.uaa.com"
         });
     }
