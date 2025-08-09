@@ -39,7 +39,7 @@ function execute(url) {
             detail += "标签：" + tags.join(" ") + "<br>";
         }
 
-        // Prepare an array of tag objects so that tags can be clickable in the UI.
+        // Prepare an array of genre objects so that tags can be clickable in the UI.
         // Each object contains a title (label), an input (used as query parameter),
         // and the script to handle the tag – reuse cate.js which lists novels by tag.
         let tagItems = [];
@@ -58,7 +58,7 @@ function execute(url) {
             // Preserve the existing description extraction and remove line breaks
             description: book.select(".brief_box").text().replace(/\r?\n/g, "<br>").replace("开始阅读", ""),
             detail: detail,
-            tags: tagItems,
+            genres: tagItems,
             host: "https://www.uaa.com"
         });
     }
