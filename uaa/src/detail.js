@@ -57,9 +57,14 @@ function execute(url) {
         // appropriate page), and the script name to execute.  When the user
         // taps this suggestion, vBookApp will run comment.js and display
         // the parsed comment list.
+        // Provide a suggestion entry for the comments section.  The title is in
+        // Chinese (评论) to match the interface language and improve detection
+        // by vBookApp.  The input remains the current detail URL so that
+        // comment.js can fetch the same page and extract comments.  Use the
+        // script filename directly.
         let suggests = [
             {
-                title: "Bình luận",
+                title: "评论",
                 input: url,
                 script: "comment.js"
             }

@@ -24,7 +24,7 @@ if(BASE_COOKIE!=""){
 console.log(doc)
         // Lấy các phần tử có class 'line' và nối thành nội dung
         doc.select(".line").forEach(e => {
-            content += e.text() + "<br>";
+            content += e.text() + " ";
         });
 
         return Response.success(content);

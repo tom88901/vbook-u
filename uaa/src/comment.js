@@ -66,11 +66,17 @@ function execute(url) {
         // content), and detail line summarising rating, time and likes.  This
         // mirrors the structure used in search/toc results, which the app
         // renders as a list of entries.
+        // Compose a comment entry.  Besides the standard name, cover,
+        // description and detail fields, vBookApp expects a link field.
+        // Since comments are not linkable to a separate page, provide
+        // an empty string for the link.  Including the link key
+        // prevents the UI from discarding the object.
         comments.push({
             name: nickname,
             cover: avatar,
             description: content,
-            detail: `评分: ${score} · ${time} · 点赞: ${likes}`
+            detail: `评分: ${score} · ${time} · 点赞: ${likes}`,
+            link: ""
         });
     });
 
