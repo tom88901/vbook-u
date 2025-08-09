@@ -8,9 +8,9 @@
       "name": "Uaa",
       "author": "Zhi",
       "path": "https://raw.githubusercontent.com/tom88901/vbook-u/main/uaa/uaa.zip",
-      "version": 19,
+      "version": 20,
       "source": "https://www.uaa.com",
-      "description": "Create tag trên uaa.com",
+      "description": "Fix tag trên uaa.com",
       "type": "chinese_novel",
       "locale": "zh_CN"
     }
