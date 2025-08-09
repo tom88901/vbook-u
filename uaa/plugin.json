@@ -3,10 +3,10 @@
     "name": "Uaa",
     "author": "zhi",
     // Bump the version from 17 to 18 to reflect the new tags support.
-    "version": 22,
+    "version": 23,
     "source": "https://www.uaa.com",
     "regexp": "(www.|m.)?uaa.com/novel/(chapter|intro)[?]id=\\d+",
-    "description": "V22: hiển thị tag, hỗ trợ nhấn vào tag (genres), bổ sung gợi ý bình luận",
+    "description": "V23: hiển thị tag, hỗ trợ nhấn vào tag (genres), bổ sung gợi ý bình luận",
     "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel",
