@@ -2,10 +2,11 @@
   "metadata": {
     "name": "Uaa",
     "author": "zhi",
+    // Bump the version from 17 to 18 to reflect the new tags support.
     "version": 22,
     "source": "https://www.uaa.com",
     "regexp": "(www.|m.)?uaa.com/novel/(chapter|intro)[?]id=\\d+",
-    "description": "V22: add comment",
+    "description": "V22: hiển thị tag, hỗ trợ nhấn vào tag (genres), bổ sung gợi ý bình luận",
     "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel",
@@ -17,6 +18,8 @@
     "search": "search.js",
     "toc": "toc.js",
     "genre": "genre.js",
-    "chap": "chap.js"
+    "chap": "chap.js",
+    // Add the comment script so that users can view comments from the detail page.
+    "comment": "comment.js"
   }
 }
