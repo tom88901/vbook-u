@@ -3,10 +3,10 @@
     "name": "Uaa",
     "author": "zhi",
     // Bump the version from 17 to 18 to reflect the new tags support.
-    "version": 23,
+    "version": 26,
     "source": "https://www.uaa.com",
     "regexp": "(www.|m.)?uaa.com/novel/(chapter|intro)[?]id=\\d+",
-    "description": "V23: fix comment list (add link field, Chinese title)",
+    "description": "V26: fix comment list (add link field, Chinese title)",
     "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel",
