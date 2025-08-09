@@ -2,11 +2,10 @@
   "metadata": {
     "name": "Uaa",
     "author": "zhi",
-    // Bump the version from 17 to 18 to reflect the new tags support.
-    "version": 26,
+    "version": 21,
     "source": "https://www.uaa.com",
     "regexp": "(www.|m.)?uaa.com/novel/(chapter|intro)[?]id=\\d+",
-    "description": "V26: fix comment list (add link field, Chinese title)",
+    "description": "V21: fix tag",
     "locale": "zh_CN",
     "language": "javascript",
     "type": "chinese_novel",
@@ -18,8 +17,6 @@
     "search": "search.js",
     "toc": "toc.js",
     "genre": "genre.js",
-    "chap": "chap.js",
-    // Add the comment script so that users can view comments from the detail page.
-    "comment": "comment.js"
+    "chap": "chap.js"
   }
 }
