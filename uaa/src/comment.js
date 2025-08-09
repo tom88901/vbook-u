@@ -61,13 +61,16 @@ function execute(url) {
         // Comment text.  Use .text() to get plain text without HTML tags.
         let content = box.select(".content").text();
 
+        // Construct an item in the format expected by vBookApp.  Each item
+        // includes a name (nickname), cover (avatar), description (comment
+        // content), and detail line summarising rating, time and likes.  This
+        // mirrors the structure used in search/toc results, which the app
+        // renders as a list of entries.
         comments.push({
-            avatar: avatar,
-            nickname: nickname,
-            score: score,
-            time: time,
-            likes: likes,
-            content: content
+            name: nickname,
+            cover: avatar,
+            description: content,
+            detail: `评分: ${score} · ${time} · 点赞: ${likes}`
         });
     });
 
