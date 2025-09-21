@@ -1,0 +1,21 @@
+{
+    "metadata": {
+        "author": "Zhi",
+        "description": "Gà làm cho vui"
+    },
+    "data": [
+        {
+            "name": "Uaa",
+            "author": "Zhi7",
+            "path": "https://raw.githubusercontent.com/tom88901/vbook-u/main/plugin.json",
+            "version": 26,
+            "source": "https://www.uaa.com/novel/list",
+            "description": "Uaa",
+            "type": "chinese_novel",
+            "locale": "zh_CN"
+        }
+    ]
+}
+        }
+    ]
+}
