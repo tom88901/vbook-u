@@ -19,6 +19,10 @@
  * “Bình luận” suggestion from the detail screen.
  */
 
+// Load base configuration to obtain BASE_URL and BASE_COOKIE.  Without
+// loading config.js, BASE_URL is undefined in this script.
+load('config.js');
+
 function execute(url) {
     // Fetch the HTML page for the novel introduction.  The URL passed in
     // typically comes from the detail suggestion and points to the same
@@ -31,54 +35,67 @@ function execute(url) {
     let doc = response.html();
     let comments = [];
 
-    // Each comment is wrapped in a div with class "comment_box" inside
-    // the comment list container.  Iterate over them and extract fields.
-    doc.select("#comment_list .comment_box").forEach(box => {
-        // Avatar image URL
-        let avatar = box.select(".avatar").attr("src");
-
-        // Nickname (may be truncated)
-        let nickname = box.select(".nick_name").text();
-
-        // Score / rating.  On uaa.com this appears as a numeric value
-        // alongside a star icon (e.g. "10.00").  Grab the first span
-        // inside .score_box to obtain it.
-        let score = "";
-        let scoreSpan = box.select(".score_box span");
-        if (!scoreSpan.isEmpty()) {
-            score = scoreSpan.first().text();
+    // Try to retrieve the novel ID from the comment list container.  The
+    // comments are loaded dynamically via an endpoint such as
+    // /comments?novelId=<id>&offset=0.  If we can find the data-id
+    // attribute, we'll fetch the full list from that endpoint.
+    let novelId = doc.select('#comment_list').attr('data-id') || doc.select('#content_list').attr('data-id');
+    if (novelId) {
+        // Build the comments API URL and fetch it.
+        let apiUrl = BASE_URL + '/comments?novelId=' + novelId + '&offset=0';
+        let resp = fetch(apiUrl);
+        if (resp.ok) {
+            let html = resp.html();
+            // Parse the returned HTML/fragment for comment boxes
+            html.select('.comment_box').forEach(box => {
+                let avatar = box.select('.avatar').attr('src');
+                let nickname = box.select('.nick_name').text();
+                let score = '';
+                let scoreSpan = box.select('.score_box span');
+                if (!scoreSpan.isEmpty()) {
+                    score = scoreSpan.first().text();
+                }
+                let time = box.select('.time').text();
+                let likes = box.select('.awesome span').text();
+                if (!likes) likes = '0';
+                let content = box.select('.content').text();
+                comments.push({
+                    name: nickname,
+                    cover: avatar,
+                    description: content,
+                    detail: `评分: ${score} · ${time} · 点赞: ${likes}`,
+                    link: ''
+                });
+            });
         }
+    }
 
-        // Relative time, e.g. "3天前" (3 days ago)
-        let time = box.select(".time").text();
-
-        // Likes / upvote count.  The number sits in a span inside .awesome.
-        let likes = box.select(".awesome span").text();
-        if (!likes) {
-            likes = "0";
-        }
-
-        // Comment text.  Use .text() to get plain text without HTML tags.
-        let content = box.select(".content").text();
-
-        // Construct an item in the format expected by vBookApp.  Each item
-        // includes a name (nickname), cover (avatar), description (comment
-        // content), and detail line summarising rating, time and likes.  This
-        // mirrors the structure used in search/toc results, which the app
-        // renders as a list of entries.
-        // Compose a comment entry.  Besides the standard name, cover,
-        // description and detail fields, vBookApp expects a link field.
-        // Since comments are not linkable to a separate page, provide
-        // an empty string for the link.  Including the link key
-        // prevents the UI from discarding the object.
-        comments.push({
-            name: nickname,
-            cover: avatar,
-            description: content,
-            detail: `评分: ${score} · ${time} · 点赞: ${likes}`,
-            link: ""
+    // Fallback: if no comments were retrieved via API, try to parse
+    // whatever comments exist in the original HTML.  This covers cases
+    // where the comments may already be present (e.g. when the page
+    // embeds a few comments by default).
+    if (comments.length === 0) {
+        doc.select('#comment_list .comment_box').forEach(box => {
+            let avatar = box.select('.avatar').attr('src');
+            let nickname = box.select('.nick_name').text();
+            let score = '';
+            let scoreSpan = box.select('.score_box span');
+            if (!scoreSpan.isEmpty()) {
+                score = scoreSpan.first().text();
+            }
+            let time = box.select('.time').text();
+            let likes = box.select('.awesome span').text();
+            if (!likes) likes = '0';
+            let content = box.select('.content').text();
+            comments.push({
+                name: nickname,
+                cover: avatar,
+                description: content,
+                detail: `评分: ${score} · ${time} · 点赞: ${likes}`,
+                link: ''
+            });
         });
-    });
+    }
 
     return Response.success(comments);
 }

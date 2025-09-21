@@ -24,7 +24,11 @@ if(BASE_COOKIE!=""){
 console.log(doc)
         // Lấy các phần tử có class 'line' và nối thành nội dung
         doc.select(".line").forEach(e => {
-            content += e.text() + "<br>";
+            // Join each line with HTML line breaks so that the reading view
+            // preserves paragraph separation instead of concatenating all
+            // sentences with spaces.  Using <br> twice provides a blank
+            // line between paragraphs, similar to the original layout.
+            content += e.text() + "<br><br>";
         });
 
         return Response.success(content);
